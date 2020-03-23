@@ -125,11 +125,23 @@ export const deleteListItem = (selectorID) => {
 export const displayMonth = () => {
 
     const now = new Date();
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const month = now.getMonth();
-    const year = now.getFullYear()
+    const year = now.getFullYear();
+    const months = new Map();
+    months.set(0, 'January');
+    months.set(1, 'February');
+    months.set(2, 'March');
+    months.set(3, 'April');
+    months.set(4, 'May');
+    months.set(5, 'June');
+    months.set(6, 'July');
+    months.set(7, 'August');
+    months.set(8, 'September');
+    months.set(9, 'October');
+    months.set(10, 'November');
+    months.set(11, 'December');
 
-    document.querySelector(dateLabel).textContent = months[month] + ' ' + year;
+    document.querySelector(dateLabel).textContent = months.get(month) + ' ' + year;
 }
 
 export const changedType = () => {
