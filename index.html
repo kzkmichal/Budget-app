@@ -41,13 +41,32 @@
             <div class="add__container">
                 <select class="add__type">
             <option value="inc" selected>+</option>
-            <option value="exp">-</option>
+            <option value="exp" >-</option>
           </select>
+                <div class="add__subList">
+                    <select class="add__list-inc">
+              <option selected placeholder="Add description"></option>
+              <option value="salary">salary</option>
+              <option value="auction">auction</option>
+              <option value="orders">orders</option>
+              <option value="othersInc">others</option>
+            </select>
+                    <select class="add__list-exp">
+              <option selected></option>
+              <option value="bills">bills</option>
+              <option value="trips">trips</option>
+              <option value="shopping">shopping</option>
+              <option value="othersExp">others</option>
+            </select>
+                </div>
+
                 <input type="text" class="add__description" placeholder="Add description" />
                 <input type="number" class="add__value" placeholder="Value" />
                 <button class="add__btn">
             <i class="ion-ios-checkmark-outline"></i>
           </button>
+
+                <button class="clear__btn">clearBudget</button>
             </div>
         </div>
 

@@ -1,14 +1,15 @@
 class Element {
-    constructor(id, description, value) {
+    constructor(id, date, description, value) {
         this.id = id;
+        this.date = date;
         this.description = description;
         this.value = value;
         this.percentage = -1;
     };
 }
 class Expense extends Element {
-    constructor(id, description, value, ) {
-        super(id, description, value)
+    constructor(id, date, description, value, ) {
+        super(id, date, description, value)
         this.percentage = -1;
     };
 
@@ -29,8 +30,8 @@ class Expense extends Element {
 }
 
 class Income extends Element {
-    constructor(id, description, value) {
-        super(id, description, value)
+    constructor(id, date, description, value) {
+        super(id, date, description, value)
     }
 }
 
@@ -55,7 +56,8 @@ const data = {
     percentage: -1
 };
 
-export const addItem = (type, des, val) => {
+
+export const addItem = (date, type, des, val) => {
     let newItem;
     let ID;
 
@@ -68,11 +70,11 @@ export const addItem = (type, des, val) => {
 
     // Create new item based on 'inc' or 'exp' type
     if (type === 'exp') {
-        newItem = new Expense(ID, des, val);
+        newItem = new Expense(ID, date, des, val);
     } else if (type === 'inc') {
-        newItem = new Income(ID, des, val);
-    }
+        newItem = new Income(ID, date, des, val);
 
+    }
     // Push it into our data structure
     data.allItems[type].push(newItem);
 
@@ -127,6 +129,14 @@ export const deleteItem = (type, id) => {
     const index = ids.indexOf(id);
     if (index !== -1) {
         data.allItems[type].splice(index, 1)
+
     }
+
+
+}
+export const deleteBudget = () => {
+    data.allItems.inc.splice(0, data.allItems.inc.length)
+    data.allItems.exp.splice(0, data.allItems.exp.length)
+
 
 }

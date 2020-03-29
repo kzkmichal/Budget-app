@@ -2,9 +2,13 @@
 
 const DOMstrings = {
     inputType: '.add__type',
+    inputSubInc: `.add__list-inc`,
+    inputSubExp: `.add__list-exp`,
+    inputSub: `.add__list-`,
     inputDescription: '.add__description',
     inputValue: '.add__value',
     inputBtn: '.add__btn',
+    clearBtn: '.clear__btn',
     incomeContainer: '.income__list',
     expensesContainer: '.expenses__list',
     budgetLabel: '.budget__value',
@@ -13,13 +17,18 @@ const DOMstrings = {
     percentageLabel: '.budget__expenses--percentage',
     container: '.container',
     expensesPercLabel: '.item__percentage',
-    dateLabel: '.budget__title--month'
+    dateLabel: '.budget__title--month',
+    item: '.item'
 };
 export const {
     inputType,
+    inputSubInc,
+    inputSubExp,
+    inputSub,
     inputDescription,
     inputValue,
     inputBtn,
+    clearBtn,
     incomeContainer,
     expensesContainer,
     budgetLabel,
@@ -29,11 +38,38 @@ export const {
     container,
     expensesPercLabel,
     dateLabel,
+    item
 } = DOMstrings
+
+
+const months = new Map();
+months.set(0, 'January');
+months.set(1, 'February');
+months.set(2, 'March');
+months.set(3, 'April');
+months.set(4, 'May');
+months.set(5, 'June');
+months.set(6, 'July');
+months.set(7, 'August');
+months.set(8, 'September');
+months.set(9, 'October');
+months.set(10, 'November');
+months.set(11, 'December');
+
+
+const weekDays = new Map();
+weekDays.set(0, 'Sun');
+weekDays.set(1, 'Mon');
+weekDays.set(2, 'Tue');
+weekDays.set(3, 'Wed');
+weekDays.set(4, 'Thu');
+weekDays.set(5, 'Fri');
+weekDays.set(6, 'Sat');
 
 
 export const getInput = () => {
     return {
+        date: currentDate(),
         type: document.querySelector(inputType).value,
         description: document.querySelector(inputDescription).value,
         value: parseFloat(document.querySelector(inputValue).value)
@@ -43,18 +79,18 @@ export const getInput = () => {
 
 export const addListItem = (obj, type) => {
     let html, newHtml, element;
-
     if (type === 'inc') {
         element = incomeContainer;
-        html = '<div class="item clearfix" id="inc-%id%"> <div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+        html = '<div class="item clearfix" id="inc-%id%"> <div class="item__date  clearfix"">%date%</div><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
     } else if (type === 'exp') {
         element = expensesContainer;
 
-        html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+        html = '<div class="item clearfix" id="exp-%id%"><div class="item__date  clearfix"">%date%</div><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
     }
 
     // Replace the placeholder text with some actual data
     newHtml = html.replace('%id%', obj.id);
+    newHtml = newHtml.replace('%date%', obj.date);
     newHtml = newHtml.replace('%description%', obj.description);
     newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
 
@@ -118,29 +154,41 @@ export const displayPercentages = (percentages) => {
 
 export const deleteListItem = (selectorID) => {
     const el = document.getElementById(selectorID);
+    console.log(el);
+
     el.parentNode.removeChild(el);
 
+
+
 };
+const currentDate = () => {
+    const date = new Date()
+    const dayWeek = date.getDay();
+    const dayMonth = date.getDate();
+    const month = date.getMonth();
+    let end;
+    if (dayMonth === 1 || dayMonth === 21 || dayMonth === 31) {
+        end = "st "
+    } else if (dayMonth === 2 || dayMonth === 22) {
+        end = "nd "
+    } else if (dayMonth === 3 || dayMonth === 23) {
+        end = "rd "
+    } else(
+        end = "th "
+    )
+    const newDate = weekDays.get(dayWeek) + ' ' + date.getDate() + end +
+        months.get(month)
+    return newDate;
+}
+
+
+
+
 
 export const displayMonth = () => {
-
     const now = new Date();
     const month = now.getMonth();
     const year = now.getFullYear();
-    const months = new Map();
-    months.set(0, 'January');
-    months.set(1, 'February');
-    months.set(2, 'March');
-    months.set(3, 'April');
-    months.set(4, 'May');
-    months.set(5, 'June');
-    months.set(6, 'July');
-    months.set(7, 'August');
-    months.set(8, 'September');
-    months.set(9, 'October');
-    months.set(10, 'November');
-    months.set(11, 'December');
-
     document.querySelector(dateLabel).textContent = months.get(month) + ' ' + year;
 }
 
@@ -156,5 +204,35 @@ export const changedType = () => {
     })
 
     document.querySelector(inputBtn).classList.toggle('red');
+
+}
+
+
+
+
+
+export const getSubList = () => {
+    return {
+        incomeSubList: document.querySelector(inputSubInc),
+        expenseSubList: document.querySelector(inputSubInc)
+    }
+}
+
+
+export const showSubList = (type) => {
+    let dd = document.querySelector(inputSub + type);
+    dd.style.display = 'block'
+
+
+
+}
+
+
+export const clearBudget = () => {
+    const items = [...document.querySelectorAll(item)]
+    items.map(item => {
+        item.innerHTML = " "
+    })
+
 
 }

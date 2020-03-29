@@ -7,6 +7,9 @@ as
 budgetCtrl
 from "./budgetController.js"
 
+const arr = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+localStorage.setItem('items', JSON.stringify(arr))
+
 
 const setupEventListeners = () => {
     document.querySelector(UI.inputBtn).addEventListener('click', ctrlAddItem);
@@ -20,6 +23,14 @@ const setupEventListeners = () => {
 
     document.querySelector(UI.inputType).addEventListener('change', UI.changedType);
 };
+document.querySelector(UI.clearBtn).addEventListener('click', () => {
+    localStorage.clear('items')
+    UI.clearBudget()
+    budgetCtrl.deleteBudget()
+    update()
+
+});
+
 
 
 const updateBudget = () => {
@@ -41,69 +52,112 @@ const updatePercentages = function() {
     UI.displayPercentages(percentages);
 };
 
+const updatetype = () => {
+    const type = UI.getInput().type
+    UI.showSubList(type)
+}
+
+
+const uploadLocalStorage = () => {
+    const localData = JSON.parse(localStorage.getItem('items'))
+    localData.forEach(el => {
+        const newItem = budgetCtrl.addItem(el.date, el.type, el.description, el.value);
+        UI.addListItem(newItem, el.type)
+        update()
+    });
+}
 
 const ctrlAddItem = () => {
     // 1. Get the field input data
-    // const input = UI.getInput();
     const {
+        date,
         type,
         description,
         value
     } = UI.getInput();
+
     if (description !== "" && !isNaN(value) && value > 0) {
         // 2. Add the item to the budget controller
-        const newItem = budgetCtrl.addItem(type, description, value);
-        console.log(newItem);
-
+        const newItem = budgetCtrl.addItem(date, type, description, value, );
         // 3. Add the item to the UI
-        UI.addListItem(newItem, type)
+        const newLocalItem = {
+            ...UI.getInput(),
+            ...newItem
+        }
+        arr.push(newLocalItem)
+        localStorage.setItem('items', JSON.stringify(arr))
+
+        UI.addListItem(newItem, type, )
             // 4. Clear the fields
+            // UI.showSubList(type);
         UI.clearFields();
-
+        updatetype();
         // 5. Calculate and update budget
-        updateBudget();
+        update()
+            // 6. Calculate and update percentages
 
-        // 6. Calculate and update percentages
-        updatePercentages();
+
+
+
         // }
     }
 };
 
+//
+
 
 const ctrlDeleteItem = (event) => {
     const itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
-    console.log(itemID);
     if (itemID) {
         //         //inc-1
         const splitID = itemID.split('-');
         const type = splitID[0];
         const id = parseInt(splitID[1]);
-
         // 1. delete the item from the data structure
         budgetCtrl.deleteItem(type, id);
-
         // 2. Delete the item from the UI
         UI.deleteListItem(itemID);
-
         // 3. Update and show the new budget
-        updateBudget();
+        update()
+            // 4. Calculate and update percentages
+        const indexLocal = arr.findIndex(element => element.type === type && element.id === id)
 
-        // 4. Calculate and update percentages
-        updatePercentages();
+        arr.splice(indexLocal, 1)
+        localStorage.setItem('items', JSON.stringify(arr))
+        console.log(arr);
+
     }
+
 };
+// const {
+//     incomeList,
+//     ExpensesList
+// } = UI.getSubList()
 
 
+const update = () => {
+
+    updateBudget();
+
+    updatePercentages();
+
+
+
+
+}
 
 const init = () => {
     UI.displayMonth()
+    updatetype()
     UI.displayBudget({
         budget: 0,
         totalInc: 0,
         totalExp: 0,
         percentage: -1
     });
-    setupEventListeners()
+    setupEventListeners();
+    uploadLocalStorage()
+
 }
 
 init();
