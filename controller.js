@@ -54,7 +54,7 @@ const updatePercentages = function() {
 
 const updatetype = () => {
     const type = UI.getInput().type
-    UI.showSubList(type)
+    UI.showSubList(type);
 }
 
 
@@ -70,7 +70,7 @@ const uploadLocalStorage = () => {
 const ctrlAddItem = () => {
     // 1. Get the field input data
     const {
-        date,
+        // date,
         type,
         description,
         value
@@ -78,11 +78,11 @@ const ctrlAddItem = () => {
 
     if (description !== "" && !isNaN(value) && value > 0) {
         // 2. Add the item to the budget controller
-        const newItem = budgetCtrl.addItem(date, type, description, value, );
+        const newItem = budgetCtrl.addItem(UI.currentDate(), type, description, value, );
         // 3. Add the item to the UI
         const newLocalItem = {
             ...UI.getInput(),
-            ...newItem
+            ...newItem,
         }
         arr.push(newLocalItem)
         localStorage.setItem('items', JSON.stringify(arr))
