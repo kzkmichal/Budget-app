@@ -25,6 +25,7 @@ const setupEventListeners = () => {
 };
 document.querySelector(UI.clearBtn).addEventListener('click', () => {
     localStorage.clear('items')
+    arr.splice(0, arr.length)
     UI.clearBudget()
     budgetCtrl.deleteBudget()
     update()
