@@ -116,6 +116,16 @@ body {
     border-radius: 3px;
 }
 
+.list {
+    margin-left: 40px;
+}
+
+.list>li {
+    list-style-type: none;
+    color: white;
+    font-size: 20px;
+}
+
 
 /**********************************************
 *** BOTTOM PART

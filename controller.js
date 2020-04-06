@@ -24,7 +24,8 @@ const setupEventListeners = () => {
     document.querySelector(UI.inputType).addEventListener('change', UI.changedType);
 };
 document.querySelector(UI.clearBtn).addEventListener('click', () => {
-    localStorage.clear('items')
+    localStorage.clear('items');
+    arr.splice(0, arr.length)
     UI.clearBudget()
     budgetCtrl.deleteBudget()
     update()
@@ -38,8 +39,10 @@ const updateBudget = () => {
     budgetCtrl.calculateBudget();
     // 2. Return the budget
     const budget = budgetCtrl.getBudget();
+    const sublist = budgetCtrl.getSublist();
     // 3. Display the budget on the UI
     UI.displayBudget(budget);
+    UI.displaySubEl(sublist);
 };
 
 
@@ -61,8 +64,8 @@ const updatetype = () => {
 const uploadLocalStorage = () => {
     const localData = JSON.parse(localStorage.getItem('items'))
     localData.forEach(el => {
-        const newItem = budgetCtrl.addItem(el.date, el.type, el.description, el.value);
-        UI.addListItem(newItem, el.type)
+        const newItem = budgetCtrl.addItem(el.date, el.type, el.description, el.value, el.category);
+        UI.addListItem(newItem, el.type);
         update()
     });
 }
@@ -70,15 +73,18 @@ const uploadLocalStorage = () => {
 const ctrlAddItem = () => {
     // 1. Get the field input data
     const {
-        // date,
+        date,
         type,
         description,
-        value
+        value,
     } = UI.getInput();
+
+    const category = UI.showSubList();
 
     if (description !== "" && !isNaN(value) && value > 0) {
         // 2. Add the item to the budget controller
-        const newItem = budgetCtrl.addItem(UI.currentDate(), type, description, value, );
+        const newItem = budgetCtrl.addItem(date, type, description, value, category);
+
         // 3. Add the item to the UI
         const newLocalItem = {
             ...UI.getInput(),
@@ -86,6 +92,7 @@ const ctrlAddItem = () => {
         }
         arr.push(newLocalItem)
         localStorage.setItem('items', JSON.stringify(arr))
+
 
         UI.addListItem(newItem, type, )
             // 4. Clear the fields
@@ -117,14 +124,15 @@ const ctrlDeleteItem = (event) => {
         budgetCtrl.deleteItem(type, id);
         // 2. Delete the item from the UI
         UI.deleteListItem(itemID);
+        // budgetCtrl.deleteSubEl(type, id);
+
         // 3. Update and show the new budget
         update()
             // 4. Calculate and update percentages
         const indexLocal = arr.findIndex(element => element.type === type && element.id === id)
-
         arr.splice(indexLocal, 1)
         localStorage.setItem('items', JSON.stringify(arr))
-        console.log(arr);
+
 
     }
 

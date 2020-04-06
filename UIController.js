@@ -69,10 +69,11 @@ weekDays.set(6, 'Sat');
 
 export const getInput = () => {
     return {
-        // date: currentDate(),
+        date: currentDate(),
         type: document.querySelector(inputType).value,
         description: document.querySelector(inputDescription).value,
-        value: parseFloat(document.querySelector(inputValue).value)
+        value: parseFloat(document.querySelector(inputValue).value),
+        // category: document.querySelector(inputSubInc).value
     };
 };
 
@@ -93,7 +94,7 @@ export const addListItem = (obj, type) => {
     newHtml = newHtml.replace('%date%', obj.date);
     newHtml = newHtml.replace('%description%', obj.description);
     newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
-    let sub = document.querySelector(inputSub + type).value;
+    let subEl = document.querySelector(`.${obj.category}`)
 
     // Insert the HTML into the DOM
     document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
@@ -150,17 +151,19 @@ export const displayPercentages = (percentages) => {
     })
 
 }
+export const displaySubEl = (sub) => {
+    for (let [key, value] of Object.entries(sub)) {
+        document.querySelector(`.${key}`).textContent = value
 
+    }
+    // document.querySelector(`.${el}`).textContent = sub[el]
+
+}
 
 
 export const deleteListItem = (selectorID) => {
     const el = document.getElementById(selectorID);
-    console.log(el);
-
     el.parentNode.removeChild(el);
-
-
-
 };
 export const currentDate = () => {
     const date = new Date()
@@ -214,7 +217,6 @@ export const clearBudget = () => {
         item.innerHTML = " "
     })
 
-
 }
 
 
@@ -233,11 +235,12 @@ export const showSubList = () => {
     if (type == "inc") {
         document.querySelector(inputSubInc).style.display = 'block';
         document.querySelector(inputSubExp).style.display = 'none';
-        document.querySelector(inputSubExp).value = 'choose'
 
     } else if (type == "exp") {
-        document.querySelector(inputSubInc).value = 'choose'
         document.querySelector(inputSubInc).style.display = 'none';
         document.querySelector(inputSubExp).style.display = 'block';
     }
+    //   inputSub: `.add__list-`,
+    return document.querySelector(inputSub + type).value;
+
 }
