@@ -1,0 +1,19 @@
+.box {
+    box-sizing: border-box;
+    width: 26rem;
+    height: 26rem;
+    margin: 1rem;
+    padding: 1rem 2rem;
+    // @include boxShadow(2rem)
+}
+
+.soft-style {
+    height: 3rem;
+    @include boxShadow(5rem);
+}
+
+.soft-style-inset {
+    height: 3rem;
+    @include boxShadow-inset(5rem);
+    border: none;
+}

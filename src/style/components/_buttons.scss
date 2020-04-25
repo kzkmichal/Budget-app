@@ -1,0 +1,41 @@
+// .link {
+//     &,
+//     &:link,
+//     &:visited {
+//         color: var(--color-black);
+//         border: 0.3rem solid var(--color-primary);
+//         border-radius: 0.5rem;
+//         text-decoration: none;
+//         font-weight: 700;
+//         line-height: 100%;
+//         padding: 2rem 2.5rem;
+//         z-index: 10;
+//         box-sizing: border-box;
+//         position: relative;
+//         box-shadow: 0 0.2rem 0.3rem rgba(#232931, 0.3);
+//         @include respond(tab-land-mobile) {
+//             border: none;
+//             color: var(--color-white);
+//             background-color: var(--color-primary);
+//             transition: transform 0.2s ease, background-color 0.2s ease;
+//             @include borderEffect(0.3rem, 0, 0, 100%, 100%, var(--color-primary));
+//             &:hover {
+//                 transform: translateY(-0.2rem);
+//                 color: var(--color-grey-dark-3);
+//                 background-color: transparent;
+//                 box-shadow: none;
+//             }
+//         }
+//         @include respond(tab-land) {
+//             text-align: center;
+//         }
+//         @include respond(tab-port) {
+//             width: 19rem;
+//             font-size: 2rem;
+//             padding: 2.5rem 2rem;
+//         }
+//     }
+// }
+.btn {
+    @include button-reset;
+}
