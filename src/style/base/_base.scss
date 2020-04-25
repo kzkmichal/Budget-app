@@ -1,0 +1,72 @@
+:root {
+    --color-primary: #3F4D67;
+    --color-text-light: #5E6E8D;
+    --color-header: #5C9EFF;
+    --color-background: #e7f0ff;
+    --color-inc: #3AD92C;
+    --color-exp: #FF511A;
+    --color-white: #ffff;
+    --color-black: #000;
+    --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+    --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.06);
+    --line: 1px solid var(--color-grey-light-2);
+}
+
+// [data-theme="dark"] {
+//     --color-primary: #00d28e;
+//     --color-grey-light-1: #393e46;
+//     --color-grey-light-2: #232931; // background
+//     --color-grey-light-3: #111010; //box color
+//     --color-grey-dark-3: #eeeeee; //font color
+//     --color-nav: #eeeeeeed; //font color
+//     --color-black: #ffff;
+//     --color-white: #000;
+// }
+$bp-largest: 75em; // 1200px
+$bp-large: 68.75em; // 1100px
+$bp-medium: 56.25em; // 900px
+$bp-small: 37.5em; // 600px
+$bp-smallest: 31.25em; // 500px
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+*:focus {
+    outline: none;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    @include respond(tab-land) {}
+    @include respond(tab-port) {}
+    @include respond(mobile) {}
+    @include respond(mobile-small) {}
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    background-color: var(--color-background);
+    min-height: 100vh;
+    width: 100%;
+    font-size: 1.6rem;
+    box-sizing: border-box;
+}
+
+// html {
+//     box-sizing: border-box;
+//     font-size: 62.5%;
+//     @media only screen and(max-width: $bp-large) {
+//         font-size: 50%;
+//     }
+// }
