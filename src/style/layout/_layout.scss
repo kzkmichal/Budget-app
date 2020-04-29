@@ -1,193 +1,345 @@
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    @include respond(mobile-small) {
-        width: 40rem;
-    }
-    @include respond(mobile) {}
-}
-
-.header {
-    display: flex;
-    flex-direction: column;
-    @include boxShadow(2rem);
-    @include respond(mobile) {
-        flex-direction: row;
-    }
-}
-
-.manage {
-    @extend .box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    font-size: 1.2rem;
-    color: var(--color-text-light);
-    &__row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    &__select {
-        position: relative;
-        &:after {
-            z-index: 1;
-            content: 'keyboard_arrow_down';
-            font-family: 'material icons';
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--color-text-light);
-            font-size: inherit;
-            pointer-events: none;
-        }
-    }
-    &__type,
-    &__list {
-        @extend .soft-style;
-        border: none;
-        width: 10rem;
-        padding: 0 1rem;
-        appearance: none;
-        font-size: inherit;
-        font-family: inherit;
-        color: inherit;
-    }
-    &__option {
-        font: 1.3rem;
-        color: var(--color-text-light);
-    }
-    &__add {
-        @extend .soft-style;
-        height: 4rem !important;
-        width: 4rem;
-        border-radius: .5rem !important;
-        position: relative;
-    }
-    &__clear {
-        @extend .soft-style;
-        width: 10rem;
-        margin-left: auto;
-    }
-    &__icon {
-        @include centered;
-    }
-    &__description,
-    &__value {
-        box-sizing: border-box;
-        padding: 0 1rem;
-        @extend .soft-style-inset;
-        text-align: center;
-        color: var(--color-primary);
-        font-size: inherit;
-        font-family: inherit;
-    }
-    &__description {
-        width: 100%;
-    }
-    &__value {
-        width: 10rem;
-    }
-}
-
-.budget {
-    @extend .box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    &__date {
-        display: flex;
-        color: var(--color-header);
-        font-weight: 600;
-        font-size: 2.2rem;
-        justify-content: space-between;
-        align-items: center;
-        @include boxShadow(.5rem);
-        height: 4rem;
-        padding: 0 1rem;
-    }
-    &__results {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        padding: 0 1rem;
-        // align-items: flex-end;
-        @include boxShadow(2rem);
-    }
-    &__income,
-    &__expenses,
-    &__total {
-        font-size: 1.8rem;
-        font-weight: 600;
-        display: flex;
-        margin: 1rem 0;
-        &--value {
-            margin-left: auto;
-        }
-    }
-    &__income {
-        &--value {
-            color: var(--color-inc);
-        }
-    }
-    &__expenses {
-        &--value {
-            color: var(--color-exp);
-        }
-    }
-    &__total {
-        color: var(--color-primary);
-    }
-}
-
-.sublist {
-    &__incomes,
-    &__expences {
-        @extend .box;
-        color: var(--color-primary);
-        @include boxShadow(2rem);
-        display: flex;
-        flex-direction: column;
-    }
-    &__title {
-        display: flex;
-        justify-content: space-between;
-    }
-    &__text {
-        font-size: 2rem;
-        font-weight: 600;
-    }
-    &__icon {
-        width: 4rem;
-        height: 4rem;
-        @include boxShadow(.5rem);
-    }
-    &__container {}
-    &__list {
-        box-sizing: border-box;
-        list-style-type: none;
-    }
-    &__item {
-        margin: .5rem 0;
-        display: flex;
-        align-items: center;
-    }
-    &__value {
-        margin-left: auto;
-        ;
-    }
-    &__description {
-        padding-left: 1rem;
-    }
-    &__icon {
+    body {
         display: flex;
         align-items: center;
         justify-content: center;
+        @include respond(tab-land) {}
     }
-}
+
+    .container {
+        box-sizing: border-box;
+        width: 28rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem auto;
+        @include boxShadow(2rem);
+        @include respond(mobile-small) {
+            margin: 2rem auto;
+            width: 30rem;
+        }
+        @include respond(mobile) {
+            width: 60rem;
+            padding: 2rem;
+        }
+        @include respond(tab-land) {
+            width: 90rem;
+            align-items: flex-start;
+            flex-direction: row;
+        }
+    }
+
+    .header,
+    .main {
+        display: flex;
+        flex-direction: column;
+        @include respond(mobile) {
+            flex-direction: row;
+        }
+    }
+
+    .header {
+        @include respond(mobile) {
+            @include boxShadow(2rem);
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+        @include respond(tab-land) {
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 1rem;
+            padding: 0;
+        }
+    }
+
+    .manage {
+        @extend .box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        font-size: 1.2rem;
+        color: var(--color-text-light);
+        &__row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &__select {
+            position: relative;
+            &:after {
+                z-index: 1;
+                content: 'keyboard_arrow_down';
+                font-family: 'material icons';
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--color-text-light);
+                font-size: inherit;
+                pointer-events: none;
+            }
+        }
+        &__type,
+        &__list {
+            @extend .soft-style;
+            border: none;
+            width: 10rem;
+            padding: 0 1rem;
+            appearance: none;
+            font-size: inherit;
+            font-family: inherit;
+            color: inherit;
+        }
+        &__option {
+            font: 1.3rem;
+            color: var(--color-text-light);
+        }
+        &__add {
+            @extend .soft-style;
+            height: 4rem !important;
+            width: 4rem;
+            border-radius: .5rem !important;
+            position: relative;
+        }
+        &__clear {
+            @extend .soft-style;
+            width: 10rem;
+            margin-left: auto;
+        }
+        &__icon {
+            @include centered;
+        }
+        &__description,
+        &__value {
+            box-sizing: border-box;
+            padding: 0 1rem;
+            @extend .soft-style-inset;
+            text-align: center;
+            color: var(--color-primary);
+            font-size: inherit;
+            font-family: inherit;
+        }
+        &__description {
+            width: 100%;
+        }
+        &__value {
+            width: 10rem;
+        }
+    }
+
+    .budget,
+    .manage {
+        @include respond(mobile) {}
+        @include respond(tab-land) {
+            margin-bottom: .5rem;
+        }
+    }
+
+    .budget {
+        @extend .box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        &__date {
+            display: flex;
+            color: var(--color-header);
+            font-weight: 600;
+            font-size: 2.2rem;
+            justify-content: space-between;
+            align-items: center;
+            @include boxShadow(.5rem);
+            height: 4rem;
+            padding: 0 1rem;
+        }
+        &__results {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 0 1rem;
+            // align-items: flex-end;
+            @include boxShadow(2rem);
+        }
+        &__income,
+        &__expenses,
+        &__total {
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            margin: 1rem 0;
+            &--value {
+                margin-left: auto;
+            }
+        }
+        &__income {
+            &--value {
+                color: var(--color-inc);
+            }
+        }
+        &__expenses {
+            &--value {
+                color: var(--color-exp);
+            }
+        }
+        &__total {
+            color: var(--color-primary);
+        }
+    }
+
+    .sublist {
+        margin: 0 1rem 1rem 1rem;
+        &__incomes,
+        &__expences {
+            @extend .box;
+            // margin: 1rem;
+            color: var(--color-primary);
+            @include boxShadow(2rem);
+            display: flex;
+            flex-direction: column;
+            @include respond(tab-land) {}
+        }
+        &__incomes {
+            margin-bottom: 1rem;
+        }
+        &__title {
+            margin: 2rem 0 3rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &__text {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        &__icon {
+            width: 3rem;
+            height: 3rem;
+            color: var(--color-header);
+            @include boxShadow(.5rem);
+            &--inc {
+                color: var(--color-inc);
+            }
+            &--exp {
+                color: var(--color-exp);
+            }
+        }
+        &__container {
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+        &__list {
+            box-sizing: border-box;
+            list-style-type: none;
+        }
+        &__item {
+            margin: .5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        &__value {
+            margin-left: auto;
+            ;
+        }
+        &__description {
+            padding-left: 1rem;
+        }
+        &__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .detailed {
+        color: var(--color-primary);
+        box-sizing: border-box;
+        margin: 0 1rem 1rem 1rem;
+        &__income,
+        &__expenses {
+            box-sizing: border-box;
+            width: 26rem;
+            height: 53rem;
+            padding: 1rem 2rem;
+            @include boxShadow(2rem);
+            display: flex;
+            flex-direction: column;
+            @include respond(tab-land) {}
+        }
+        &__title {
+            margin: 2rem 0 3rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &__text {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        &__icon {
+            width: 3rem;
+            height: 3rem;
+            color: var(--color-header);
+            @include boxShadow(.5rem);
+            &--inc {
+                color: var(--color-inc);
+            }
+            &--exp {
+                color: var(--color-exp);
+            }
+        }
+    }
+
+    .item {
+        display: flex;
+        font-size: 1.4rem;
+        align-items: center;
+        @include boxShadow(.5rem);
+        padding: .5rem;
+        font-weight: 500;
+        position: relative;
+        &__date {
+            width: 2.5rem;
+            font-weight: 400;
+            text-align: center;
+            color: var(--color-header);
+            line-height: 1.1;
+        }
+        &__day {
+            font-size: 1rem;
+        }
+        &__description {
+            flex-grow: 1;
+            padding-left: 1rem;
+        }
+        &__value {
+            margin-right: 1rem;
+        }
+        &__button {
+            @include button-reset;
+            width: 1.6rem;
+            height: 1.6rem;
+            @include boxShadow(.4rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        &__button-icon {
+            font-size: 1.2rem;
+            color: var(--color-header);
+        }
+        &__options {
+            position: absolute;
+            right: 2.5rem;
+            width: 5rem;
+            @include boxShadow(.5rem);
+            display: flex;
+            justify-content: center;
+            display: none;
+        }
+        &__delete {
+            @include button-reset;
+        }
+        &__delete-text {
+            font-size: 1.2rem;
+        }
+    }

@@ -90,18 +90,20 @@ const ctrlAddItem = () => {
             ...UI.getInput(),
             ...newItem,
         }
-        arr.push(newLocalItem)
-        localStorage.setItem('items', JSON.stringify(arr))
+        console.log(newLocalItem);
+
+        // arr.push(newLocalItem)
+        // localStorage.setItem('items', JSON.stringify(arr))
 
 
-        UI.addListItem(newItem, type, )
-            // 4. Clear the fields
-            // UI.showSubList(type);
-        UI.clearFields();
+        // UI.addListItem(newItem, type, )
+        //     // 4. Clear the fields
+        //     // UI.showSubList(type);
+        // UI.clearFields();
         updatetype();
-        // 5. Calculate and update budget
-        update()
-            // 6. Calculate and update percentages
+        // // 5. Calculate and update budget
+        // update()
+        // 6. Calculate and update percentages
 
 
 
@@ -154,17 +156,19 @@ const update = () => {
 
 }
 
-const init = () => {
-    UI.displayMonth()
+
+export const init = () => {
+    // UI.displayMonth()
     updatetype()
-    UI.displayBudget({
-        budget: 0,
-        totalInc: 0,
-        totalExp: 0,
-        percentage: -1
-    });
+        // UI.displayBudget({
+        //     budget: 0,
+        //     totalInc: 0,
+        //     totalExp: 0,
+        //     percentage: -1
+        // });
     setupEventListeners();
-    uploadLocalStorage()
+    // uploadLocalStorage()
+    console.log(UI.getInput());
 
 }
 

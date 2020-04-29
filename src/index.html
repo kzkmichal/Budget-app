@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="main.bundle.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="main.bundle.css" rel="stylesheet" type="text/css" /> -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Budgety</title>
 </head>
 
@@ -26,6 +27,12 @@
                                 <option value="auction">auction</option>
                                 <option value="orders">orders</option>
                                 <option selected value="othersInc">others</option>
+                            </select>
+                        <select class="manage__list manage__list-exp" id="" name="">
+                                <option value="bills ">bills</option>
+                                <option value="trips ">trips</option>
+                                <option value="shopping ">shopping</option>
+                                <option selected value="othersExp ">others</option>
                             </select>
                     </div>
                 </div>
@@ -74,7 +81,7 @@
                 <div class="sublist__incomes">
                     <div class="sublist__title">
                         <div class="sublist__text">Incomes</div>
-                        <div class="sublist__icon">
+                        <div class="sublist__icon sublist__icon--inc">
                             <span class="material-icons">
                                     call_made
                                 </span>
@@ -89,7 +96,7 @@
                                         </span>
                                 </div>
                                 <div class="sublist__description">Salary</div>
-                                <div class="sublist__value">33.55</div>
+                                <div class="sublist__value salary">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
@@ -97,8 +104,8 @@
                                             call_made
                                         </span>
                                 </div>
-                                <div class="sublist__description">Salary</div>
-                                <div class="sublist__value">33.55</div>
+                                <div class="sublist__description">Auction</div>
+                                <div class="sublist__value auction">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
@@ -106,154 +113,264 @@
                                             call_made
                                         </span>
                                 </div>
-                                <div class="sublist__description">Salary</div>
-                                <div class="sublist__value">33.55</div>
+                                <div class="sublist__description">Orders</div>
+                                <div class="sublist__value orders">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
                                     <i class="fas fa-arrow-up"></i>
                                 </div>
-                                <div class="sublist__description">Salary</div>
-                                <div class="sublist__value">33.55</div>
+                                <div class="sublist__description">Others</div>
+                                <div class="sublist__value othersInc">0</div>
                             </li>
-
                         </ul>
                     </div>
                 </div>
-                <div class="sublist__expences"></div>
+                <div class="sublist__expences">
+                    <div class="sublist__title">
+                        <div class="sublist__text">Expences</div>
+                        <div class="sublist__icon sublist__icon--exp">
+                            <span class="material-icons">
+                                    call_made
+                                </span>
+                        </div>
+                    </div>
+                    <div class="sublist__container">
+                        <ul class="sublist__list">
+                            <li class="sublist__item">
+                                <div class="sublist__icon">
+                                    <span class="material-icons">
+                                            call_made
+                                        </span>
+                                </div>
+                                <div class="sublist__description">Bills</div>
+                                <div class="sublist__value bills">0</div>
+                            </li>
+                            <li class="sublist__item">
+                                <div class="sublist__icon">
+                                    <span class="material-icons">
+                                            call_made
+                                        </span>
+                                </div>
+                                <div class="sublist__description">shopping</div>
+                                <div class="sublist__value shopping">0</div>
+                            </li>
+                            <li class="sublist__item">
+                                <div class="sublist__icon">
+                                    <span class="material-icons">
+                                            call_made
+                                        </span>
+                                </div>
+                                <div class="sublist__description">Trips</div>
+                                <div class="sublist__value trips">0</div>
+                            </li>
+                            <li class="sublist__item">
+                                <div class="sublist__icon">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="sublist__description">Others</div>
+                                <div class="sublist__value othersExp">0</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="detailed">
+                <div class="detailed__income income">
+                    <div class="detailed__title">
+                        <div class="detailed__text">Incomes</div>
+                        <div class="detailed__icon"></div>
+                    </div>
+                    <div class="detailed__container">
+                        <ul class="detailed_list">
+                            <li class="item detailed__item" id="exp-%id%">
+                                <div class="item__date">
+                                    <div class="item__number">10</div>
+                                    <div class="item__day">Fri</div>
+                                </div>
+                                <div class="item__description">
+                                    Salary
+                                </div>
+                                <div class="item__value">33</div>
+                                <!-- <div class="item__percentage ">21%</div> -->
+                                <button class="item__button">
+                                        <span class="material-icons item__button-icon">
+                                            more_horiz
+                                        </span>
+                                    </button>
+                                <div class="item__options">
+                                    <button class="item__delete">
+                                            <span class="item__delete-text">delete</span>
+                                        </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- <div class="detailed__expenses expenses">
+                    <div class="detailed__title">
+                        <div class="detailed__text">Expenses</div>
+                        <div class="detailed__icon"></div>
+                    </div>
+                    <div class="detailed__container">
+                        <ul class="detailed_list">
+                            <li class="item detailed__item" id="exp-%id%">
+                                <div class="item__date">
+                                    <div class="item__number">10</div>
+                                    <div class="item__day">Fri</div>
+                                </div>
+                                <div class="item__description">
+                                    Salary
+                                </div>
+                                <div class="item__value">33</div>
+                                <button class="item__button">
+                                        <span class="material-icons item__button-icon">
+                                            more_horiz
+                                        </span>
+
+                                    </button>
+                                <div class="item__options">
+                                    <button class="item__delete">
+                                            <span class="item__delete-text">delete</span>
+                                        </button>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> -->
             </div>
         </main>
     </div>
 
-    <!-- <div class="top">
-        <div class="budget">
-            <div class="budget__title">
-                Available Budget in <span class="budget__title--month">%Month%</span>:
+    <!-- <div class="top ">
+        <div class="budget ">
+            <div class="budget__title ">
+                Available Budget in <span class="budget__title--month ">%Month%</span>:
             </div>
 
-            <div class="budget__value">+ 2,345.64</div>
+            <div class="budget__value ">+ 2,345.64</div>
 
-            <div class="budget__income clearfix">
-                <div class="budget__income--text">Income</div>
-                <div class="right">
-                    <div class="budget__income--value">+ 4,300.00</div>
-                    <div class="budget__income--percentage">&nbsp;</div>
+            <div class="budget__income clearfix ">
+                <div class="budget__income--text ">Income</div>
+                <div class="right ">
+                    <div class="budget__income--value ">+ 4,300.00</div>
+                    <div class="budget__income--percentage ">&nbsp;</div>
                 </div>
             </div>
 
-            <div class="budget__expenses clearfix">
-                <div class="budget__expenses--text">Expenses</div>
-                <div class="right clearfix">
-                    <div class="budget__expenses--value">- 1,954.36</div>
-                    <div class="budget__expenses--percentage">45%</div>
+            <div class="budget__expenses clearfix ">
+                <div class="budget__expenses--text ">Expenses</div>
+                <div class="right clearfix ">
+                    <div class="budget__expenses--value ">- 1,954.36</div>
+                    <div class="budget__expenses--percentage ">45%</div>
                 </div>
             </div>
         </div>
-        <ul class="list">
-            <li class="salary">0</li>
-            <li class="auction">0</li>
-            <li class="orders">0</li>
-            <li class="othersInc">0</li>
-            <li class="bills">0</li>
-            <li class="trips">0</li>
-            <li class="shopping">0</li>
-            <li class="othersExp">0</li>
+        <ul class="list ">
+            <li class="salary ">0</li>
+            <li class="auction ">0</li>
+            <li class="orders ">0</li>
+            <li class="othersInc ">0</li>
+            <li class="bills ">0</li>
+            <li class="trips ">0</li>
+            <li class="shopping ">0</li>
+            <li class="othersExp ">0</li>
         </ul>
     </div>
 
-    <div class="bottom">
-        <div class="add">
-            <div class="add__container">
-                <select class="add__type">
-                    <option value="inc" selected>+</option>
-                    <option value="exp">-</option>
+    <div class="bottom ">
+        <div class="add ">
+            <div class="add__container ">
+                <select class="add__type ">
+                    <option value="inc " selected>+</option>
+                    <option value="exp ">-</option>
                 </select>
-                <div class="add__subList">
-                    <select class="add__list-inc">
-                        <option value="salary">salary</option>
-                        <option value="auction">auction</option>
-                        <option value="orders">orders</option>
-                        <option selected value="othersInc">others</option>
+                <div class="add__subList ">
+                    <select class="add__list-inc ">
+                        <option value="salary ">salary</option>
+                        <option value="auction ">auction</option>
+                        <option value="orders ">orders</option>
+                        <option selected value="othersInc ">others</option>
                     </select>
-                    <select class="add__list-exp">
-                        <option value="bills">bills</option>
-                        <option value="trips">trips</option>
-                        <option value="shopping">shopping</option>
-                        <option selected value="othersExp">others</option>
+                    <select class="add__list-exp ">
+                        <option value="bills ">bills</option>
+                        <option value="trips ">trips</option>
+                        <option value="shopping ">shopping</option>
+                        <option selected value="othersExp ">others</option>
                     </select>
                 </div>
 
-                <input type="text" class="add__description" placeholder="Add description" />
-                <input type="number" class="add__value" placeholder="Value" />
-                <button class="add__btn">
-                    <i class="ion-ios-checkmark-outline"></i>
+                <input type="text " class="add__description " placeholder="Add description " />
+                <input type="number " class="add__value " placeholder="Value " />
+                <button class="add__btn ">
+                    <i class="ion-ios-checkmark-outline "></i>
                 </button>
 
-                <button class="clear__btn">clearBudget</button>
+                <button class="clear__btn ">clearBudget</button>
             </div>
         </div>
 
-        <div class="container clearfix">
-            <div class="income">
-                <h2 class="icome__title">Income</h2>
+        <div class="container clearfix ">
+            <div class="income ">
+                <h2 class="icome__title ">Income</h2>
 
-                <div class="income__list"></div>
+                <div class="income__list "></div>
             </div>
 
-            <div class="expenses">
-                <h2 class="expenses__title">Expenses</h2>
+            <div class="expenses ">
+                <h2 class="expenses__title ">Expenses</h2>
 
-                <div class="expenses__list"></div>
+                <div class="expenses__list "></div>
             </div>
         </div>
     </div> -->
-
-    <!-- <script src="original.js"></script> -->
-    <!-- <script type="module" src="controller.js "></script> -->
+    <!-- <script src="main.bundle.js "></script> -->
 </body>
 
 </html>
 
-<!-- <select name="" id="" class="manage__list manage__list-inc">
-                                                                <option class="manage__option" value="salary">salary</option>
-                                                                <option value="auction">auction</option>
-                                                                <option value="orders">orders</option>
-                                                                <option selected value="othersInc">others</option>
+<!-- <select name=" " id=" " class="manage__list manage__list-inc ">
+                                                                <option class="manage__option " value="salary ">salary</option>
+                                                                <option value="auction ">auction</option>
+                                                                <option value="orders ">orders</option>
+                                                                <option selected value="othersInc ">others</option>
                                                             </select> -->
-<!-- <select name="" id="" class="manage__list manage__list-exp">
-                                                                    <option value="bills">bills</option>
-                                                                    <option value="trips">trips</option>
-                                                                    <option value="shopping">shopping</option>
-                                                                    <option selected value="othersExp">others</option>
+<!-- <select name=" " id=" " class="manage__list manage__list-exp ">
+                                                                    <option value="bills ">bills</option>
+                                                                    <option value="trips ">trips</option>
+                                                                    <option value="shopping ">shopping</option>
+                                                                    <option selected value="othersExp ">others</option>
                                                                 </select> -->
 
-<!-- <div class="add">
-                            <div class="add__container">
-                                <select class="add__type">
-                                    <option value="inc" selected>+</option>
-                                    <option value="exp">-</option>
+<!-- <div class="add ">
+                            <div class="add__container ">
+                                <select class="add__type ">
+                                    <option value="inc " selected>+</option>
+                                    <option value="exp ">-</option>
                                 </select>
-                                <div class="add__subList">
-                                    <select class="add__list-inc">
-                                        <option value="salary">salary</option>
-                                        <option value="auction">auction</option>
-                                        <option value="orders">orders</option>
-                                        <option selected value="othersInc">others</option>
+                                <div class="add__subList ">
+                                    <select class="add__list-inc ">
+                                        <option value="salary ">salary</option>
+                                        <option value="auction ">auction</option>
+                                        <option value="orders ">orders</option>
+                                        <option selected value="othersInc ">others</option>
                                     </select>
-                                    <select class="add__list-exp">
-                                        <option value="bills">bills</option>
-                                        <option value="trips">trips</option>
-                                        <option value="shopping">shopping</option>
-                                        <option selected value="othersExp">others</option>
+                                    <select class="add__list-exp ">
+                                        <option value="bills ">bills</option>
+                                        <option value="trips ">trips</option>
+                                        <option value="shopping ">shopping</option>
+                                        <option selected value="othersExp ">others</option>
                                     </select>
                                 </div>
 
-                                <input type="text" class="add__description" placeholder="Add description" />
-                                <input type="number" class="add__value" placeholder="Value" />
-                                <button class="add__btn">
-                                    <i class="ion-ios-checkmark-outline"></i>
+                                <input type="text " class="add__description " placeholder="Add description " />
+                                <input type="number " class="add__value " placeholder="Value " />
+                                <button class="add__btn ">
+                                    <i class="ion-ios-checkmark-outline "></i>
                                 </button>
 
-                                <button class="clear__btn">clearBudget</button>
+                                <button class="clear__btn ">clearBudget</button>
                             </div>
                         </div> -->

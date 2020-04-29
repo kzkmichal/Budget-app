@@ -37,7 +37,7 @@
 // }
 @mixin respond($breakpoint) {
     @if $breakpoint==mobile-small {
-        @media(min-width: 25em) {
+        @media(min-width: 21em) {
             @content
         }
         ;
@@ -61,7 +61,7 @@
         ;
     }
     @if $breakpoint==tab-land {
-        @media(max-width: 75em) {
+        @media(min-width: 56.25em) {
             @content
         }
         ;

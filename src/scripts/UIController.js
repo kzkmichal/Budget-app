@@ -1,14 +1,14 @@
 // UI CONTROLLER
 
 const DOMstrings = {
-    inputType: '.add__type',
-    inputSubInc: `.add__list-inc`,
-    inputSubExp: `.add__list-exp`,
-    inputSub: `.add__list-`,
-    inputDescription: '.add__description',
-    inputValue: '.add__value',
-    inputBtn: '.add__btn',
-    clearBtn: '.clear__btn',
+    inputType: '.manage__type',
+    inputSubInc: `.manage__list-inc`,
+    inputSubExp: `.manage__list-exp`,
+    inputSub: `.manage__list-`,
+    inputDescription: '.manage__description',
+    inputValue: '.manage__value',
+    inputBtn: '.manage__add',
+    clearBtn: '.manage__clear',
     incomeContainer: '.income__list',
     expensesContainer: '.expenses__list',
     budgetLabel: '.budget__value',
@@ -232,6 +232,8 @@ export const getSubList = () => {
 export const showSubList = () => {
 
     let type = getInput().type;
+    console.log(type);
+
     if (type == "inc") {
         document.querySelector(inputSubInc).style.display = 'block';
         document.querySelector(inputSubExp).style.display = 'none';
@@ -240,7 +242,6 @@ export const showSubList = () => {
         document.querySelector(inputSubInc).style.display = 'none';
         document.querySelector(inputSubExp).style.display = 'block';
     }
-    //   inputSub: `.add__list-`,
     return document.querySelector(inputSub + type).value;
 
 }
