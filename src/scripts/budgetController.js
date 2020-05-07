@@ -13,8 +13,6 @@
          super(id, date, description, value, category)
          this.percentage = -1;
      };
-
-
      calcPercentage(totalIncome) {
          if (totalIncome > 0) {
              this.percentage = Math.round((this.value / totalIncome) * 100);
@@ -22,9 +20,6 @@
              this.percentage = -1;
          }
      };
-
-
-
      getPercentage() {
          return this.percentage;
      };
@@ -55,13 +50,12 @@
  const data = {
      allItems: {
          exp: [],
-         inc: []
+         inc: [],
      },
      totals: {
          exp: 0,
          inc: 0
      },
-
      sublist: {
          salary: 0,
          auction: 0,
@@ -72,10 +66,14 @@
          shopping: 0,
          othersExp: 0,
      },
+     all: [],
      budget: 0,
      percentage: -1,
-
  };
+
+ const {
+     all
+ } = data.all
 
  const sublist = {
      salary: [],
@@ -93,40 +91,31 @@
      let newItem;
      let ID;
 
-     // Create new ID
-     if (data.allItems[type].length > 0) {
-         ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+     if (data.all.length > 0) {
+         ID = data.all[data.all.length - 1].id + 1;
      } else {
          ID = 0;
      }
 
-     // Create new item based on 'inc' or 'exp' type
      if (type === 'exp') {
          newItem = new Expense(ID, date, des, val, cat);
      } else if (type === 'inc') {
          newItem = new Income(ID, date, des, val, cat);
 
      }
-     // Push it into our data structure
      data.allItems[type].push(newItem);
-     // Return the new element
-
+     data.all.push(newItem)
      sublist[cat].push(newItem.value)
-         // calculateTotalSub(cat)
+     calculateTotalSub(cat)
      return newItem;
 
  }
 
  export const calculateBudget = () => {
-
-     // calculate total income and expenses
      calculateTotal('exp');
      calculateTotal('inc');
 
-     // Calculate the budget: income - expenses
      data.budget = data.totals.inc - data.totals.exp;
-
-     // calculate the percentage of income that we spent
      if (data.totals.inc > 0) {
          data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
      } else {
@@ -161,7 +150,6 @@
      data.allItems.exp.forEach(e => {
          e.calcPercentage(data.totals.inc)
      })
-
  }
 
  export const getPercentages = () => {
@@ -178,45 +166,26 @@
      const getCatAndVal = data.allItems[type].map(i => {
          return [i.category, i.value]
      })
-
-
      const index = ids.indexOf(id);
-
-
      const cat = getCatAndVal[index][0];
      const val = getCatAndVal[index][1];
-
-     console.log(cat, val);
-
-
      deleteSubEl(cat, val);
-
-
-
      if (index !== -1) {
          data.allItems[type].splice(index, 1)
-
      }
 
  }
  export const deleteBudget = () => {
      data.allItems.inc.splice(0, data.allItems.inc.length)
      data.allItems.exp.splice(0, data.allItems.exp.length)
-
      for (let [key, value] of Object.entries(sublist)) {
          value.splice(0, value.length);
          calculateTotalSub(key)
      }
-
-
-
  }
 
  const deleteSubEl = (cat, val) => {
-
      const ind = sublist[cat].indexOf(val);
      sublist[cat].splice(ind, 1)
      calculateTotalSub(cat)
-
-
  }

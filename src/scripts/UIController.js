@@ -4,41 +4,52 @@ const DOMstrings = {
     inputType: '.manage__type',
     inputSubInc: `.manage__list-inc`,
     inputSubExp: `.manage__list-exp`,
-    inputSub: `.manage__list-`,
+    inputSub: `.manage__list`,
+    inputSelect: `.manage__sublist`,
     inputDescription: '.manage__description',
     inputValue: '.manage__value',
     inputBtn: '.manage__add',
     clearBtn: '.manage__clear',
-    incomeContainer: '.income__list',
-    expensesContainer: '.expenses__list',
-    budgetLabel: '.budget__value',
+    iconBtn: '.manage__icon',
+    detailedContainer: '.detailed__list',
+    budgetLabel: '.budget__total--value',
     incomeLabel: '.budget__income--value',
     expensesLabel: '.budget__expenses--value',
     percentageLabel: '.budget__expenses--percentage',
-    container: '.container',
+    container: '.detailed__container',
     expensesPercLabel: '.item__percentage',
-    dateLabel: '.budget__title--month',
-    item: '.item'
+    dateLabel: {
+        labelMonth: '.budget__month',
+        labelYear: '.budget__year'
+    },
+    item: '.item',
+    editBtn: '.item__button'
+
 };
 export const {
     inputType,
     inputSubInc,
     inputSubExp,
     inputSub,
+    inputSelect,
     inputDescription,
     inputValue,
     inputBtn,
     clearBtn,
-    incomeContainer,
-    expensesContainer,
+    iconBtn,
+    detailedContainer,
     budgetLabel,
     incomeLabel,
     expensesLabel,
     percentageLabel,
     container,
     expensesPercLabel,
-    dateLabel,
-    item
+    dateLabel: {
+        labelMonth,
+        labelYear
+    },
+    item,
+    editBtn
 } = DOMstrings
 
 
@@ -73,31 +84,29 @@ export const getInput = () => {
         type: document.querySelector(inputType).value,
         description: document.querySelector(inputDescription).value,
         value: parseFloat(document.querySelector(inputValue).value),
-        // category: document.querySelector(inputSubInc).value
     };
 };
 
 
 export const addListItem = (obj, type) => {
-    let html, newHtml, element;
+    let html;
     if (type === 'inc') {
-        element = incomeContainer;
-        html = '<div class="item clearfix" id="inc-%id%"> <div class="item__date  clearfix"">%date%</div><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+        html = `<li class ="item detailed__item" id ="${type}-${obj.id}">
+            <div class="item__date">
+                <div class ="item__number">${obj.date.day}</div>
+                <div class ="item__day">${obj.date.weekDay}</div>
+            </div>
+            <div class ="item__description">${obj.description}</div>
+            <div class="item__value--inc item__value">${formatNumber(obj.value, type)} </div>
+            <button class="item__button">
+                <span class="material-icons item__button-icon">delete</span>
+            </button>
+        </li>`
     } else if (type === 'exp') {
-        element = expensesContainer;
-
-        html = '<div class="item clearfix" id="exp-%id%"><div class="item__date  clearfix"">%date%</div><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+        html = `<li class ="item detailed__item" id ="${type}-${obj.id}"><div class="item__date"><div class ="item__number">${obj.date.day}</div><div class ="item__day">${obj.date.weekDay}</div> </div> <div class ="item__description">${obj.description}</div><div class="item__value--exp item__value">${formatNumber(obj.value, type)} </div><div class ="item__percentage"></div> <button class="item__button item__button--${obj.id}"><span class="material-icons item__button-icon">delete</span></button>
+         </li>`
     }
-
-    // Replace the placeholder text with some actual data
-    newHtml = html.replace('%id%', obj.id);
-    newHtml = newHtml.replace('%date%', obj.date);
-    newHtml = newHtml.replace('%description%', obj.description);
-    newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
-    let subEl = document.querySelector(`.${obj.category}`)
-
-    // Insert the HTML into the DOM
-    document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
+    document.querySelector(detailedContainer).insertAdjacentHTML('beforeend', html);
 }
 const formatNumber = function(num, type) {
     num = Math.abs(num);
@@ -111,11 +120,9 @@ const formatNumber = function(num, type) {
     }
     const dec = numSplit[1];
     return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
-
 };
 
 export const clearFields = () => {
-
     const fields = [...(document.querySelectorAll(inputDescription + ',' + inputValue))]
     fields.forEach(field => {
         field.value = ''
@@ -126,7 +133,6 @@ export const clearFields = () => {
 export const displayBudget = function(obj) {
     let type;
     obj.budget > 0 ? type = 'inc' : type = 'exp';
-
     document.querySelector(budgetLabel).textContent = formatNumber(obj.budget, type);
     document.querySelector(incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
     document.querySelector(expensesLabel).textContent = formatNumber(obj.totalExp, 'exp');
@@ -136,7 +142,6 @@ export const displayBudget = function(obj) {
     } else {
         document.querySelector(percentageLabel).textContent = '---';
     }
-
 }
 
 export const displayPercentages = (percentages) => {
@@ -154,12 +159,8 @@ export const displayPercentages = (percentages) => {
 export const displaySubEl = (sub) => {
     for (let [key, value] of Object.entries(sub)) {
         document.querySelector(`.${key}`).textContent = value
-
     }
-    // document.querySelector(`.${el}`).textContent = sub[el]
-
 }
-
 
 export const deleteListItem = (selectorID) => {
     const el = document.getElementById(selectorID);
@@ -169,79 +170,77 @@ export const currentDate = () => {
     const date = new Date()
     const dayWeek = date.getDay();
     const dayMonth = date.getDate();
-    const month = date.getMonth();
-    let end;
-    if (dayMonth === 1 || dayMonth === 21 || dayMonth === 31) {
-        end = "st "
-    } else if (dayMonth === 2 || dayMonth === 22) {
-        end = "nd "
-    } else if (dayMonth === 3 || dayMonth === 23) {
-        end = "rd "
-    } else(
-        end = "th "
-    )
-    const newDate = weekDays.get(dayWeek) + ' ' + date.getDate() + end +
-        months.get(month)
+    const newDate = {
+        weekDay: weekDays.get(dayWeek),
+        day: dayMonth
+
+    }
     return newDate;
 }
-
-
-
-
 
 export const displayMonth = () => {
     const now = new Date();
     const month = now.getMonth();
     const year = now.getFullYear();
-    document.querySelector(dateLabel).textContent = months.get(month) + ' ' + year;
+    document.querySelector(labelMonth).textContent = months.get(month)
+    document.querySelector(labelYear).textContent = year
 }
 
 export const changedType = () => {
+    let type = getInput().type;
+    changeColor(type)
+    showSubList(type);
+    showCategory()
+}
 
-    const fields = [...document.querySelectorAll(
-        DOMstrings.inputType + ',' +
-        DOMstrings.inputDescription + ',' +
-        DOMstrings.inputValue)];
 
-    fields.map((el) => {
-        el.classList.toggle('red-focus');
-    })
+const changeColor = (type) => {
+    const icon = document.querySelector(iconBtn)
+    if (type == 'inc') {
+        icon.innerHTML = 'add'
+    } else if (type == 'exp') {
+        icon.innerHTML = 'remove'
+    }
+    icon.style.color = `var(--color-${type})`
 
-    document.querySelector(inputBtn).classList.toggle('red');
-    showSubList();
+
 }
 
 export const clearBudget = () => {
     const items = [...document.querySelectorAll(item)]
     items.map(item => {
-        item.innerHTML = " "
+        document.querySelector(detailedContainer).removeChild(item)
     })
 
 }
-
-
-
-export const getSubList = () => {
-    return {
-        incomeSubList: document.querySelector(inputSubInc),
-        expenseSubList: document.querySelector(inputSubInc)
+export const showSubList = () => {
+    let type = getInput().type
+    let sublist;
+    if (type == "inc") {
+        sublist = `<select class ="manage__list manage__list-inc"
+                 id = ""
+                 name = "">
+                <option class ="manage__option" value="salary">salary</option>
+                 <option value ="auction">auction</option>
+                 <option value = "orders" > orders </option>
+                 <option selected value ="othersInc">other </option>
+                 </select>`
+    } else if (type == "exp") {
+        sublist = `<select class ="manage__list manage__list-exp"
+                 id = ""
+                 name = "">
+                <option class ="manage__option" value="bills">bills</option>
+                 <option option value ="trips">trips</option >
+                 <option value ="shopping">shopping</option>
+                 <option selected value ="othersExp">other </option>
+                 </select>`
     }
+
+    document.querySelector(inputSelect).innerHTML = sublist;
 }
 
+export const showCategory = () => {
+    return document.querySelector(inputSub).value;
 
-export const showSubList = () => {
-
-    let type = getInput().type;
-    console.log(type);
-
-    if (type == "inc") {
-        document.querySelector(inputSubInc).style.display = 'block';
-        document.querySelector(inputSubExp).style.display = 'none';
-
-    } else if (type == "exp") {
-        document.querySelector(inputSubInc).style.display = 'none';
-        document.querySelector(inputSubExp).style.display = 'block';
-    }
-    return document.querySelector(inputSub + type).value;
 
 }

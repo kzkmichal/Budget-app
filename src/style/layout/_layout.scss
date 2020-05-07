@@ -4,7 +4,7 @@
         justify-content: center;
         @include respond(tab-land) {}
     }
-
+    
     .container {
         box-sizing: border-box;
         width: 28rem;
@@ -28,7 +28,7 @@
             flex-direction: row;
         }
     }
-
+    
     .header,
     .main {
         display: flex;
@@ -37,7 +37,7 @@
             flex-direction: row;
         }
     }
-
+    
     .header {
         @include respond(mobile) {
             @include boxShadow(2rem);
@@ -51,7 +51,7 @@
             padding: 0;
         }
     }
-
+    
     .manage {
         @extend .box;
         display: flex;
@@ -126,7 +126,7 @@
             width: 10rem;
         }
     }
-
+    
     .budget,
     .manage {
         @include respond(mobile) {}
@@ -134,7 +134,7 @@
             margin-bottom: .5rem;
         }
     }
-
+    
     .budget {
         @extend .box;
         display: flex;
@@ -166,6 +166,7 @@
             font-weight: 600;
             display: flex;
             margin: 1rem 0;
+            align-items: center;
             &--value {
                 margin-left: auto;
             }
@@ -179,12 +180,22 @@
             &--value {
                 color: var(--color-exp);
             }
+            &--percentage {
+                @include boxShadow-inset(.5rem);
+                width: 2rem;
+                font-size: 1rem;
+                font-weight: 400;
+                margin-left: 1rem;
+                padding: .2rem;
+                color: var(--color-primary);
+                text-align: center;
+            }
         }
         &__total {
             color: var(--color-primary);
         }
     }
-
+    
     .sublist {
         margin: 0 1rem 1rem 1rem;
         &__incomes,
@@ -248,7 +259,7 @@
             justify-content: center;
         }
     }
-
+    
     .detailed {
         color: var(--color-primary);
         box-sizing: border-box;
@@ -287,7 +298,7 @@
             }
         }
     }
-
+    
     .item {
         display: flex;
         font-size: 1.4rem;
@@ -296,6 +307,7 @@
         padding: .5rem;
         font-weight: 500;
         position: relative;
+        margin-bottom: 1rem;
         &__date {
             width: 2.5rem;
             font-weight: 400;
@@ -311,7 +323,18 @@
             padding-left: 1rem;
         }
         &__value {
-            margin-right: 1rem;
+            &--inc {
+                margin-right: 3rem;
+                color: var(--color-inc)
+            }
+            &--exp {
+                margin-right: 0.5rem;
+                color: var(--color-exp)
+            }
+        }
+        &__percentage {
+            margin-right: .5rem;
+            font-size: 1rem;
         }
         &__button {
             @include button-reset;
