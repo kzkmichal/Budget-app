@@ -14,28 +14,28 @@
         <header class="header">
             <div class="manage">
                 <div class="manage__row">
-                    <div class="manage__select">
-                        <select class="manage__type" id="" name="">
-                <option selected value="inc">income</option>
-                <option value="exp">expences</option>
-              </select>
-                    </div>
-                    <div class="manage__select manage__sublist"></div>
+                    <label class="manage__select" for="type">
+                        <select class="manage__type" aria-label="select type" id="type" name="type selec">
+                            <option selected value="inc">income</option>
+                            <option value="exp">expences</option>
+                        </select>
+                    </label>
+                    <label class="manage__select manage__sublist"></label>
                 </div>
 
                 <div class="manage__row">
-                    <input class="manage__description" placeholder="description" type="text" />
+                    <input class="manage__description" placeholder="description" aria-label="insert description" type="text" />
                 </div>
 
                 <div class="manage__row">
-                    <input class="manage__value" placeholder="Value" type="number" />
-                    <button class="manage__add btn">
-              <span class="material-icons manage__icon"> </span>
-            </button>
+                    <input class="manage__value" placeholder="value" type="number" aria-label="insert value" />
+                    <button type="button" aria-label="add value" class="manage__add btn">
+                        <span class="material-icons manage__icon"> </span>
+                    </button>
                 </div>
 
                 <div class="manage__row">
-                    <button class="manage__clear btn">clear</button>
+                    <button type="button" aria-label="clear all items" class="manage__clear btn">clear</button>
                 </div>
             </div>
 
@@ -44,17 +44,21 @@
                     <div class="budget__month"></div>
                     <div class="budget__year"></div>
                 </div>
-                <div class="budget__results">
-                    <div class="budget__income">
-                        <div class="budget__income--value">0</div>
-                    </div>
-                    <div class="budget__expenses">
-                        <div class="budget__expenses--value">-0</div>
-                        <div class="budget__expenses--percentage">%</div>
-                    </div>
+                <div class="budget__summary">
                     <div class="budget__total">
-                        <div class="budget__total--text">Total:</div>
-                        <div class="budget__total--value">0</div>
+                        <div class="budget__total--text">Total</div>
+                        <div class="budget__total--value"></div>
+                    </div>
+                    <div class="budget__results">
+                        <div class="budget__income">
+                            <div class="budget__income--text">Icomes</div>
+                            <div class="budget__income--value">0</div>
+                        </div>
+                        <div class="budget__expenses">
+                            <div class="budget__expenses--text">Expenses</div>
+                            <div class="budget__expenses--value">0</div>
+                            <div class="budget__expenses--percentage">%</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,42 +70,36 @@
                         <div class="sublist__text">Incomes</div>
                         <div class="sublist__icon sublist__icon--inc">
                             <span class="material-icons">
-                  call_made
-                </span>
+                                call_made
+                            </span>
                         </div>
                     </div>
                     <div class="sublist__container">
                         <ul class="sublist__list">
                             <li class="sublist__item">
                                 <div class="sublist__icon">
-                                    <span class="material-icons">
-                      call_made
-                    </span>
+                                    <i class="fas fa-wallet"></i>
                                 </div>
                                 <div class="sublist__description">Salary</div>
                                 <div class="sublist__value salary">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
-                                    <span class="material-icons">
-                      call_made
-                    </span>
+                                    <i class="fas fa-gavel"></i>
                                 </div>
                                 <div class="sublist__description">Auction</div>
                                 <div class="sublist__value auction">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
-                                    <span class="material-icons">
-                      call_made
-                    </span>
+                                    <i class="fas fa-house-user"></i>
                                 </div>
-                                <div class="sublist__description">Orders</div>
-                                <div class="sublist__value orders">0</div>
+                                <div class="sublist__description">Renting</div>
+                                <div class="sublist__value renting">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
-                                    <i class="fas fa-arrow-up"></i>
+                                    <i class="fas fa-coins"></i>
                                 </div>
                                 <div class="sublist__description">Others</div>
                                 <div class="sublist__value othersInc">0</div>
@@ -111,45 +109,39 @@
                 </div>
                 <div class="sublist__expences">
                     <div class="sublist__title">
-                        <div class="sublist__text">Expences</div>
+                        <div class="sublist__text">Expenses</div>
                         <div class="sublist__icon sublist__icon--exp">
                             <span class="material-icons">
-                  call_made
-                </span>
+                                call_made
+                            </span>
                         </div>
                     </div>
                     <div class="sublist__container">
                         <ul class="sublist__list">
                             <li class="sublist__item">
                                 <div class="sublist__icon">
-                                    <span class="material-icons">
-                      call_made
-                    </span>
+                                    <i class="far fa-money-bill-alt"></i>
                                 </div>
                                 <div class="sublist__description">Bills</div>
                                 <div class="sublist__value bills">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
-                                    <span class="material-icons">
-                      call_made
-                    </span>
+                                    <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <div class="sublist__description">shopping</div>
+                                <div class="sublist__description">Shopping</div>
                                 <div class="sublist__value shopping">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
-                                    <span class="material-icons">
-                      call_made
-                    </span>
+                                    <i class="fas fa-plane-departure"></i>
                                 </div>
                                 <div class="sublist__description">Trips</div>
                                 <div class="sublist__value trips">0</div>
                             </li>
                             <li class="sublist__item">
                                 <div class="sublist__icon">
-                                    <i class="fas fa-arrow-up"></i>
+                                    <i class="fas fa-coins"></i>
                                 </div>
                                 <div class="sublist__description">Others</div>
                                 <div class="sublist__value othersExp">0</div>
@@ -159,10 +151,12 @@
                 </div>
             </div>
             <div class="detailed">
-                <div class="detailed__income income">
+                <div class="detailed__transactions">
                     <div class="detailed__title">
-                        <div class="detailed__text">Incomes</div>
-                        <div class="detailed__icon"></div>
+                        <div class="detailed__text">Transactions</div>
+                        <div class="detailed__icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
                     </div>
                     <div class="detailed__container">
                         <ul class="detailed__list"></ul>
@@ -171,6 +165,7 @@
             </div>
         </main>
     </div>
+    <!-- <script src="/node_modules/focus-visible/dist/focus-visible.min.js"></script> -->
 </body>
 
 </html>

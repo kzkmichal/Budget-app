@@ -1,10 +1,10 @@
 :root {
-    --color-primary: #3F4D67;
-    --color-text-light: #5E6E8D;
-    --color-header: #5C9EFF;
+    --color-primary: #3f4d67;
+    --color-text-light: #5e6e8d;
+    --color-header: #5c9eff;
     --color-background: #e7f0ff;
-    --color-inc: #3AD92C;
-    --color-exp: #FF511A;
+    --color-inc: #3ad92c;
+    --color-exp: #ff511a;
     --color-white: #ffff;
     --color-black: #000;
     --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
@@ -12,16 +12,6 @@
     --line: 1px solid var(--color-grey-light-2);
 }
 
-// [data-theme="dark"] {
-//     --color-primary: #00d28e;
-//     --color-grey-light-1: #393e46;
-//     --color-grey-light-2: #232931; // background
-//     --color-grey-light-3: #111010; //box color
-//     --color-grey-dark-3: #eeeeee; //font color
-//     --color-nav: #eeeeeeed; //font color
-//     --color-black: #ffff;
-//     --color-white: #000;
-// }
 $bp-largest: 75em; // 1200px
 $bp-large: 68.75em; // 1100px
 $bp-medium: 56.25em; // 900px
@@ -53,11 +43,15 @@ html {
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 400;
     line-height: 1.6;
     background-color: var(--color-background);
     min-height: 100vh;
     width: 100%;
     font-size: 1.6rem;
+}
+
+.js-focus-visible :focus:not(.focus-visible) {
+    outline: none;
 }

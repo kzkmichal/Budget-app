@@ -59,7 +59,7 @@
      sublist: {
          salary: 0,
          auction: 0,
-         orders: 0,
+         renting: 0,
          othersInc: 0,
          bills: 0,
          trips: 0,
@@ -78,7 +78,7 @@
  const sublist = {
      salary: [],
      auction: [],
-     orders: [],
+     renting: [],
      othersInc: [],
      bills: [],
      trips: [],
@@ -136,7 +136,7 @@
      return {
          salary: data.sublist.salary,
          auction: data.sublist.auction,
-         orders: data.sublist.orders,
+         renting: data.sublist.renting,
          othersInc: data.sublist.othersInc,
          bills: data.sublist.bills,
          trips: data.sublist.trips,

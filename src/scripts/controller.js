@@ -18,6 +18,7 @@ const setupEventListeners = () => {
             ctrlAddItem();
         }
     });
+
     document.querySelector(UI.container).addEventListener('click', ctrlDeleteItem);
     document.querySelector(UI.inputType).addEventListener('change', UI.changedType);
     document.querySelector(UI.inputSub).addEventListener('change', UI.showCategory)
@@ -50,9 +51,7 @@ const updatePercentages = function() {
     UI.displayPercentages(percentages);
 };
 
-const updatetype = () => {
-    UI.changedType();
-}
+
 const uploadLocalStorage = () => {
     const localData = JSON.parse(localStorage.getItem('items'))
     localData.forEach(el => {
@@ -89,19 +88,18 @@ const ctrlAddItem = () => {
 
 
 const ctrlDeleteItem = (event) => {
-    const itemID = event.target.parentNode.parentNode.id;
+    const itemID = event.target.parentNode.parentNode.id || event.target.parentNode.parentNode.parentNode.id;
+
     if (itemID) {
         const splitID = itemID.split('-');
         const type = splitID[0];
         const id = parseInt(splitID[1]);
-        budgetCtrl.deleteItem(type, id);
-        UI.deleteListItem(itemID);
-
-        update()
         const indexLocal = localArr.findIndex(element => element.type === type && element.id === id)
         localArr.splice(indexLocal, 1)
         localStorage.setItem('items', JSON.stringify(localArr))
-
+        budgetCtrl.deleteItem(type, id);
+        UI.deleteListItem(itemID);
+        update()
     }
 
 };

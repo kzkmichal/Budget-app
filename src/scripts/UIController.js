@@ -97,13 +97,19 @@ export const addListItem = (obj, type) => {
                 <div class ="item__day">${obj.date.weekDay}</div>
             </div>
             <div class ="item__description">${obj.description}</div>
-            <div class="item__value--inc item__value">${formatNumber(obj.value, type)} </div>
-            <button class="item__button">
-                <span class="material-icons item__button-icon">delete</span>
+            <div class="item__value--inc item__value">${formatNumber(obj.value, type)} £</div>
+            <button type="button" class="item__button">
+                <i class="far fa-trash-alt item__button-icon"></i>
             </button>
         </li>`
     } else if (type === 'exp') {
-        html = `<li class ="item detailed__item" id ="${type}-${obj.id}"><div class="item__date"><div class ="item__number">${obj.date.day}</div><div class ="item__day">${obj.date.weekDay}</div> </div> <div class ="item__description">${obj.description}</div><div class="item__value--exp item__value">${formatNumber(obj.value, type)} </div><div class ="item__percentage"></div> <button class="item__button item__button--${obj.id}"><span class="material-icons item__button-icon">delete</span></button>
+        html = `<li class ="item detailed__item" id ="${type}-${obj.id}"><div class="item__date">
+        <div class ="item__number">${obj.date.day}</div><div class ="item__day">${obj.date.weekDay}</div> </div>
+        <div class ="item__description">${obj.description}</div>
+        <div class="item__value--exp item__value">${formatNumber(obj.value, type)} £</div>
+        <div class ="item__percentage"></div> <button type="button" class="item__button ">
+             <i class="far fa-trash-alt item__button-icon"> </i>
+</button>
          </li>`
     }
     document.querySelector(detailedContainer).insertAdjacentHTML('beforeend', html);
@@ -127,20 +133,20 @@ export const clearFields = () => {
     fields.forEach(field => {
         field.value = ''
     })
-    fields[0].focus()
+    document.querySelector(inputType).focus()
 }
 
 export const displayBudget = function(obj) {
     let type;
     obj.budget > 0 ? type = 'inc' : type = 'exp';
-    document.querySelector(budgetLabel).textContent = formatNumber(obj.budget, type);
-    document.querySelector(incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
-    document.querySelector(expensesLabel).textContent = formatNumber(obj.totalExp, 'exp');
+    document.querySelector(budgetLabel).textContent = formatNumber(obj.budget, type) + '£';
+    document.querySelector(incomeLabel).textContent = formatNumber(obj.totalInc, 'inc') + '£';
+    document.querySelector(expensesLabel).textContent = formatNumber(obj.totalExp, 'exp') + '£';
 
     if (obj.percentage > 0) {
         document.querySelector(percentageLabel).textContent = obj.percentage + '%';
     } else {
-        document.querySelector(percentageLabel).textContent = '---';
+        document.querySelector(percentageLabel).textContent = '';
     }
 }
 
@@ -158,7 +164,7 @@ export const displayPercentages = (percentages) => {
 }
 export const displaySubEl = (sub) => {
     for (let [key, value] of Object.entries(sub)) {
-        document.querySelector(`.${key}`).textContent = value
+        document.querySelector(`.${key}`).textContent = `${value} £`
     }
 }
 
@@ -217,21 +223,21 @@ export const showSubList = () => {
     let type = getInput().type
     let sublist;
     if (type == "inc") {
-        sublist = `<select class ="manage__list manage__list-inc"
-                 id = ""
-                 name = "">
+        sublist = `<select aria-label="selet exact icnome" class ="manage__list manage__list-inc"
+                 id = "icomes"
+                 name = "incomesList">
                 <option class ="manage__option" value="salary">salary</option>
                  <option value ="auction">auction</option>
-                 <option value = "orders" > orders </option>
+                 <option value ="renting">renting</option>
                  <option selected value ="othersInc">other </option>
                  </select>`
     } else if (type == "exp") {
-        sublist = `<select class ="manage__list manage__list-exp"
-                 id = ""
-                 name = "">
+        sublist = `<select aria-label="selet exact expense" class ="manage__list manage__list-exp"
+                 id = "expenses"
+                 name = "expensesList">
                 <option class ="manage__option" value="bills">bills</option>
-                 <option option value ="trips">trips</option >
                  <option value ="shopping">shopping</option>
+                <option value="trips">trips</option>
                  <option selected value ="othersExp">other </option>
                  </select>`
     }
