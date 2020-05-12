@@ -33,11 +33,11 @@
 ### Project Overview
 
 <p>
-An budget app that helps record montly incomes and epenses.
+A budget app that helps record monthly incomes and epenses.
 
-Whole design was created by me in Figma.
+The design was created by me in Figma.
 
-To create this project I've used following JS and ES6 features:
+To create this project I used following JS and ES6 features:
 
 </p>
 
