@@ -1,12 +1,13 @@
 {
-    "name": "webpack_config",
+    "name": "budgety",
     "version": "1.0.0",
-    "author": "",
+    "author": "Michal Kozak",
     "description": "",
     "main": "index.js",
     "scripts": {
         "build": "webpack",
-        "dev": "webpack-dev-server"
+        "dev": "webpack-dev-server",
+        "deploy": "gh-pages -d dist"
     },
     "repository": {
         "type": "git",
@@ -14,6 +15,7 @@
     },
     "keywords": [],
     "license": "ISC",
+    "homepage": "https://kzkmichal.github.io/Budget-app",
     "devDependencies": {
         "@babel/core": "^7.9.0",
         "@babel/preset-env": "^7.9.5",
@@ -34,6 +36,7 @@
         "webpack-dev-server": "^3.10.3"
     },
     "dependencies": {
-        "focus-visible": "^5.1.0"
+        "focus-visible": "^5.1.0",
+        "gh-pages": "^2.2.0"
     }
 }

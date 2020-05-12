@@ -8,7 +8,7 @@
   <p align="center">
     An app to manage your monthly budget
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Live</a>
+    <a href="https://kzkmichal.github.io/Budget-app">View Live</a>
   </p>
 </p>
 
@@ -17,7 +17,7 @@
 ## Table of Contents
 
 - [About the Project](#about-the-project)
-  - [Project Overwiew](#project-overwiew)
+  - [Project Overview](#project-overview)
   - [Screeenshots](#screenshots)
   - [Code Examples](#code-example)
   - [Built With](#built-with)
@@ -40,6 +40,7 @@ Whole design was created by me in Figma.
 To create this project I've used following JS and ES6 features:
 
 </p>
+
 - Classes
 - Arrow Functions
 - inport/export
@@ -151,7 +152,7 @@ npm install
 
 ## Contact
 
-Email [kozakmichal48@gmail.com](mailto:kozakmichal48@gmail.com) - email@example.com
+Email [kozakmichal48@gmail.com](mailto:kozakmichal48@gmail.com)
 
 Project Link: [https://github.com/kzkmichal/Budget-app](https://github.com/kzkmichal/Budget-app)
 
